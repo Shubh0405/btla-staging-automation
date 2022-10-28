@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/btla-staging-automation.iml" filepath="$PROJECT_DIR$/.idea/btla-staging-automation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pageobject-testing-flipkart/.idea/pageobject-testing-flipkart.iml" filepath="$PROJECT_DIR$/../pageobject-testing-flipkart/.idea/pageobject-testing-flipkart.iml" />
+    </modules>
+  </component>
+</project>
