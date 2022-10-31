@@ -19,8 +19,8 @@ Feature: Login Screen
     Examples:
       |CountryCode|
       |+93|
-#      |+244|
-#      |+213|
+      |+244|
+      |+213|
 
     Given The minimum Android OS version supporting BTLA OS 5 and above
     And Launch the app online
@@ -75,3 +75,18 @@ Feature: Login Screen
     When User tap on the 'Privacy Policy' link
     Then Verify that tapping on Privacy policy link in the login screen should navigate the user to the Privacy Policy screen
 
+    Scenario: Verify that tapping on App back button in Privacy policy screen should redirect back the user to login screen
+      Given The minimum Android OS version supporting BTLA OS 5 and above
+      And Launch the app online
+      And User is in Login screen
+      When User tap on the 'Privacy Policy' link
+      And Verify the Privacy policy screen
+      And User taps on the app back arrow
+      Then Verify that user should be redirected back to the Login screen
+
+    Scenario: Verify that tapping on T&C link in the login screen should navigate the user to the Terms & Conditions screen.
+      Given The minimum Android OS version supporting BTLA OS 5 and above
+      And Launch the app online
+      And User is in Login screen
+      When User tap on the 'T & C' link
+      Then Verify that User should navigate to the Terms & Conditions screen

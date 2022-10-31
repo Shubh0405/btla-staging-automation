@@ -7,8 +7,9 @@ from src.Pages.android.SplashScreen import SplashScreen
 from src.Pages.android.LoginScreen import LoginScreen
 from src.Pages.android.PrivacyAndPolicy import PrivacyAndPolicy
 from src.Pages.android.OTPScreen import OTPScreen
+from src.Pages.android.TermsAndConditionsScreen import TermsAndConditions
 from src.utils.android_actions import click_button_by_xpath, check_if_element_displayed_by_xpath
-
+import time
 scenarios("../../Features/android/LoginScreen.feature")
 
 @given(u'The minimum Android OS version supporting BTLA OS 5 and above')
@@ -32,6 +33,7 @@ def launch_app(context):
     assert True
 
 @when(u'Navigate to the Login screen')
+@given(u'User is in Login screen')
 def navigate_to_login_screen(context):
     print("Navigate to login screen")
     login_screen = LoginScreen(context.driver)
@@ -44,6 +46,7 @@ def check_device_orientation(context):
     assert context.driver.orientation == "PORTRAIT"
 
 @then(u'Verify the Login screen icon')
+@then(u'Verify that user should be redirected back to the Login screen')
 def verify_login_screen_icon(context):
     print("Verify login screen icon")
     login_screen = LoginScreen(context.driver)
@@ -90,13 +93,14 @@ def click_country_code_menu(context):
 def select_country_code(context, CountryCode):
     login_screen = LoginScreen(context.driver)
     login_screen.select_country_code_by_text(CountryCode)
-    login_screen.click_country_code_menu_cancel_button()
+    # login_screen.click_country_code_menu_cancel_button()
     assert True
 
 @then(parsers.parse('Verify selected {CountryCode:d} should be shown in country code field'))
 def verify_selected_country_code(context, CountryCode):
+    print("verify selected country code field")
     login_screen = LoginScreen(context.driver)
-    assert login_screen.verify_auto_filled_country_code(CountryCode)
+    assert login_screen.verify_auto_filled_country_code("+" + str(CountryCode))
 
 @when(u'User is in Country code bottom sheet dialog screen')
 def check_country_code_menu(context):
@@ -153,6 +157,27 @@ def click_on_privacy_policy_link(context):
     assert True
 
 @then(u'Verify that tapping on Privacy policy link in the login screen should navigate the user to the Privacy Policy screen')
+@when(u'Verify the Privacy policy screen')
 def check_if_privacy_page_is_opened(context):
     privacy_screen = PrivacyAndPolicy(context.driver)
     assert privacy_screen.check_privacy_policy_header_text()
+
+@when(u'User taps on the app back arrow')
+def click_on_back_arrow(context):
+    privacy_screen = PrivacyAndPolicy(context.driver)
+    privacy_screen.click_back_arrow_button()
+    assert True
+
+@when(u"User tap on the 'T & C' link")
+def click_terms_page(context):
+    context.driver.hide_keyboard()
+    login_screen = LoginScreen(context.driver)
+    login_screen.click_element("xpath", login_screen.terms_and_condition_xpath)
+    assert True
+
+@then(u'Verify that User should navigate to the Terms & Conditions screen')
+def verify_terms_and_condition_page_is_opened(context):
+    terms_and_condition_screen = TermsAndConditions(context.driver)
+    assert terms_and_condition_screen.check_header_title()
+
+

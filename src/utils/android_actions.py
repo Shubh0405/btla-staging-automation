@@ -16,6 +16,8 @@ def check_if_element_displayed_by_id(driver, appium_id):
     return driver.find_element(AppiumBy.ID, appium_id).is_displayed()
 
 def get_element_text_by_xpath(driver, appium_xpath):
+    print(appium_xpath)
+    print(driver.find_element(AppiumBy.XPATH, appium_xpath).text)
     return driver.find_element(AppiumBy.XPATH, appium_xpath).text
 
 def get_element_text_by_id(driver, appium_id):
