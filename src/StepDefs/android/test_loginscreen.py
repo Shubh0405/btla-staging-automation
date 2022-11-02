@@ -8,7 +8,7 @@ from src.Pages.android.LoginScreen import LoginScreen
 from src.Pages.android.PrivacyAndPolicy import PrivacyAndPolicy
 from src.Pages.android.OTPScreen import OTPScreen
 from src.Pages.android.TermsAndConditionsScreen import TermsAndConditions
-from src.utils.android_actions import click_button_by_xpath, check_if_element_displayed_by_xpath
+from src.utils.android_actions import click_button_by_xpath, check_if_element_displayed_by_xpath, change_flight_mode_state
 import time
 scenarios("../../Features/android/LoginScreen.feature")
 
@@ -19,12 +19,6 @@ def initiate_connection(context):
     context.driver = driver.get_driver()
 
 @given(u'Launch the app online')
-def launch_app1(context):
-    print("Launch App1")
-    splash_screen = SplashScreen(context.driver)
-    splash_screen.click_location_permission_button()
-    assert True
-
 @when(u'Launch the app')
 def launch_app(context):
     print("Launch App")
@@ -181,3 +175,12 @@ def verify_terms_and_condition_page_is_opened(context):
     assert terms_and_condition_screen.check_header_title()
 
 
+@when(u'User enable offline mode')
+def enable_offline_mode(context):
+    print("enable offline mode")
+    change_flight_mode_state(context.driver)
+    assert True
+
+@then(u'show offline mode')
+def show_offline_mode(context):
+    assert True

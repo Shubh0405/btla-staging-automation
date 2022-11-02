@@ -90,3 +90,10 @@ Feature: Login Screen
       And User is in Login screen
       When User tap on the 'T & C' link
       Then Verify that User should navigate to the Terms & Conditions screen
+
+  Scenario: Test offline feature
+    Given The minimum Android OS version supporting BTLA OS 5 and above
+    And Launch the app online
+    And User is in Login screen
+    When User enable offline mode
+    Then show offline mode
